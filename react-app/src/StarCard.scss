@@ -1,0 +1,25 @@
+.StarCard {
+  height: 300px;
+  width: 250px;
+  margin: 20px 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50px;
+  border: 1px solid gold;
+
+  .cardRow {
+    display: flex;
+    width: 100%;
+  }
+
+  .text {
+    margin: auto;
+    word-wrap: break-word;
+  }
+
+  .action {
+    margin: auto;
+  }
+}
+

@@ -1,0 +1,22 @@
+{
+  "name": "project02cryptostardapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "compileDev": "truffle compile",
+    "migrateDev": "truffle migrate --reset",
+    "compileRinkeby": "truffle compile --network rinkeby",
+    "migrateRinkeby": "truffle migrate --reset --network rinkeby"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.4.0",
+    "dotenv": "^10.0.0"
+  }
+}

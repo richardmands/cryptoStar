@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+  overflow-x: hidden;
+  color: white;
+  width: 100vw;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 50px 20px;
+  max-width: 1024px;
+  overflow-y: auto;
+}
+
+.starCardsContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.createStarModal{
+  color: black;
+}
