@@ -38,7 +38,7 @@ const App = () => {
     { amount: "5", unit: "lovelace" }
   )
 
-  const [instance, tokenName, tokenSymbol] = useContract({
+  const [instance, tokenName, tokenSymbol, contractURI] = useContract({
     web3,
     smartContract: CryptoStarContract,
     gasPrice,
@@ -362,7 +362,21 @@ const App = () => {
       <ToastContainer />
 
       <h1>{tokenName || "CryptoStar"}</h1>
-      <h2>{tokenSymbol ? `(${tokenSymbol}) ERC721` : "ERC721"}</h2>
+      <h2>{tokenSymbol ? `(${tokenSymbol}) ERC721 Token` : "ERC721 Token"}</h2>
+      {contractURI ? (
+        <>
+          <h3>Deployed on Rinkeby</h3>
+          <h3>
+            <a
+              href={`https://rinkeby.etherscan.io/address/${contractURI}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {contractURI}
+            </a>
+          </h3>
+        </>
+      ) : null}
 
       {loading ? (
         <Loader

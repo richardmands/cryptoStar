@@ -11,6 +11,7 @@ function useContract({
   const [contract, setContract] = useState(null)
   const [name, setName] = useState(null)
   const [symbol, setSymbol] = useState(null)
+  const [contractURI, setContractURI] = useState(null)
 
   useEffect(() => {
     async function getName(instance) {
@@ -33,6 +34,8 @@ function useContract({
           { gasPrice, gasLimit }
         )
         setContract(instance)
+        const { _address: uri } = instance
+        setContractURI(uri)
         await getName(instance)
         await getSymbol(instance)
         onSuccess()
@@ -47,7 +50,7 @@ function useContract({
     }
   }, [web3, smartContract, gasPrice, gasLimit])
 
-  return [contract, name, symbol]
+  return [contract, name, symbol, contractURI]
 }
 
 export default useContract
