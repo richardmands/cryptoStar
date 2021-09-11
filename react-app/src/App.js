@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "react-toastify/dist/ReactToastify.css"
 import "./App.scss"
 
+import logo from "./star.png"
+
 import { store } from "./store"
 import useWeb3 from "./useWeb3"
 import useContract from "./useContract"
@@ -346,10 +348,6 @@ const App = () => {
     setIsTransferModalOpen(false)
   }, [web3])
 
-  if (!web3) {
-    return <div>Loading Web3, accounts, and contract...</div>
-  }
-
   return (
     <div className="App">
       {createModal}
@@ -361,12 +359,27 @@ const App = () => {
       <Stars />
       <ToastContainer />
 
-      <h1>{tokenName || "CryptoStar"}</h1>
-      <h2>{tokenSymbol ? `(${tokenSymbol}) ERC721 Token` : "ERC721 Token"}</h2>
-      {contractURI ? (
-        <>
-          <h3>Deployed on Rinkeby</h3>
-          <h3>
+      <header className="App-header">
+        <div className="App-logoContainer">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
+        <p>
+          CryptoStar <br /> Richard Mands <br />
+          Udacity Blockchain Nanodegree
+        </p>
+        <p className="explanation">
+          See the code on{" "}
+          <a
+            href="https://github.com/richardmands/cryptoStar"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+        </p>
+        {contractURI ? (
+          <p className="explanation">
+            Deployed on Rinkeby Test Network <br />
             <a
               href={`https://rinkeby.etherscan.io/address/${contractURI}`}
               target="_blank"
@@ -374,19 +387,48 @@ const App = () => {
             >
               {contractURI}
             </a>
-          </h3>
-        </>
-      ) : null}
+          </p>
+        ) : (
+          <p className="explanation">
+            Not connected to smart contract. Make sure you have MetaMask
+            installed and you're on the Rinkeby Test Network.
+          </p>
+        )}
+
+        <p className="explanation">Create, sell, buy and swap NFTs</p>
+        <p className="explanation">Token name: {tokenName || "CryptoStar"}</p>
+        <p className="explanation">
+          Token symbol:
+          {tokenSymbol ? ` (${tokenSymbol}) ERC721 Token` : " ERC721 Token"}
+        </p>
+      </header>
+
+      <div className="statuses">
+        <div
+          className={`contractStatus ${
+            instance ? "operational" : "notOperational"
+          }`}
+        >
+          Contract:{" "}
+          {`${
+            instance ? "Operational" : "Not logged in to MetaMask on Rinkeby"
+          }`}
+        </div>
+      </div>
 
       {loading ? (
-        <Loader
-          type="BallTriangle"
-          color="#00BFFF"
-          height={100}
-          width={100}
-          style={{ paddingTop: "20px", margin: "auto" }}
-        />
-      ) : (
+        <div className="LoaderFullScreen">
+          <Loader
+            type="Grid"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            style={{ paddingTop: "20px", margin: "auto" }}
+          />
+        </div>
+      ) : null}
+
+      {instance && !loading ? (
         <div className="starCardsContainer">
           {ids.map((id) => (
             <StarCard
@@ -402,7 +444,7 @@ const App = () => {
             />
           ))}
         </div>
-      )}
+      ) : null}
     </div>
   )
 }
