@@ -26,19 +26,24 @@ function useContract({
 
     async function prepareContract() {
       try {
+        setContract(null)
         const networkId = await web3.eth.net.getId()
         const deployedContract = smartContract.networks[networkId]
-        const instance = new web3.eth.Contract(
-          smartContract.abi,
-          deployedContract && deployedContract.address,
-          { gasPrice, gasLimit }
-        )
-        setContract(instance)
-        const { _address: uri } = instance
-        setContractURI(uri)
-        await getName(instance)
-        await getSymbol(instance)
-        onSuccess()
+        if (!deployedContract) {
+          onFailure()
+        } else {
+          const instance = new web3.eth.Contract(
+            smartContract.abi,
+            deployedContract && deployedContract.address,
+            { gasPrice, gasLimit }
+          )
+          setContract(instance)
+          const { _address: uri } = instance
+          setContractURI(uri)
+          await getName(instance)
+          await getSymbol(instance)
+          onSuccess()
+        }
       } catch (error) {
         onFailure()
         console.error(error)

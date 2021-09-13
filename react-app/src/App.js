@@ -410,9 +410,7 @@ const App = () => {
           }`}
         >
           Contract:{" "}
-          {`${
-            instance ? "Operational" : "Not logged in to MetaMask on Rinkeby"
-          }`}
+          {`${instance ? "Connected" : "Not logged in to MetaMask on Rinkeby"}`}
         </div>
       </div>
 
