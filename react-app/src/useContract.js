@@ -53,7 +53,7 @@ function useContract({
     if (web3 && gasPrice && gasLimit) {
       prepareContract()
     }
-  }, [web3, smartContract, gasPrice, gasLimit])
+  }, [web3, gasPrice, gasLimit])
 
   return [contract, name, symbol, contractURI]
 }
