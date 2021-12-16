@@ -365,7 +365,6 @@ const App = () => {
         </div>
         <p>
           CryptoStar <br /> Richard Mands <br />
-          Udacity Blockchain Nanodegree
         </p>
         <p className="explanation">
           See the code on{" "}
